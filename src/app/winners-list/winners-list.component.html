@@ -1,0 +1,42 @@
+<div class="col-lg-12 container">
+    <div class="number-grid">
+      <div class="number-box" *ngFor="let number of numbers">
+        {{ number }}
+      </div>
+    </div>
+    <div class=" col-lg-6">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Player Name</th>
+            <th scope="col">Winnung Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+          </tr>
+      
+        </tbody>
+      </table>
+    </div>
+    <div class="col-lg-12 row">
+      <div class="col-md-6">
+        <input type="text"  placeholder="Number" class="form-control" formControlName="number">
+      </div>
+      <div class="col-md-3">
+
+      <button class="start-button">Generate Number</button>
+      </div>
+      <div class="col-md-3">
+
+
+      <button class="start-button">Submit</button>
+      </div>
+
+</div>
+
+
+  </div>
+  

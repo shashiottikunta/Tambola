@@ -1,0 +1,147 @@
+/* Add this to your CSS file or style section */
+.my-button {
+    /* Add your desired styling */
+    padding: 10px 20px; /* Adjust padding as needed */
+    background-color: #4caf50; /* Green background color */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 155px; /* Add rounded corners */
+    cursor: pointer; /* Add a pointer cursor on hover */
+}
+
+.start-button {
+  /* Add your desired styling */
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #656799; /* Green background color */
+  color: white; /* White text color */
+  border: none; /* Remove border */
+  border-radius: 155px; /* Add rounded corners */
+  cursor: pointer; /* Add a pointer cursor on hover */
+}
+
+.my-button:hover {
+    background-color: #45a049; /* Darker green background color on hover */
+}
+
+
+
+.table>:not(caption)>*>* {
+  padding: .5rem .5rem !important;
+  color: var(--bs-table-color-state, var(--bs-table-color-type, var(--bs-table-color))) !important;
+  background-color: #d8d7d5 !important;;
+  border-bottom-width: var(--bs-border-width) !important;
+  box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg))) !important;
+}
+
+
+.number-grid1 {
+    display: flex;
+    flex-direction: column; /* Stack rows vertically */
+    gap: 10px; /* Adjust the gap between rows */
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between; /* Distribute items evenly along the row */
+  }
+
+
+  
+  .highlighted {
+    background-color: gray;
+  }
+  
+  .high {
+    background-color: white; /* Or any other color you prefer for unpicked numbers */
+  }
+  
+  
+  .number-box1 {
+    border: 1px solid #000;
+    padding: 5px;
+    flex: 1; /* Each box takes up equal space in the row */
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 0; /* Remove border radius */
+}
+
+
+  .number-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 0.1fr); /* 10 columns */
+    gap: 2px; /* Adjust the gap between boxes */
+  }
+  
+  .number-box {
+    width: 30px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+    border: 1px solid #646363;
+    /* border-radius: 50%;  */
+    padding: 3px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    background-color: white;
+    display: inline-flex; /* Display as inline-flex to center content vertically */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color: var(--bs-card-color);
+    margin-left: 5px;
+}
+.number-grid[_ngcontent-ng-c647066761] {
+  display: grid;
+  grid-template-columns: repeat(8, 0.1fr) 1fr;
+  gap: 2px;
+  color: black;
+  /* background-color: #6c757d; */
+}
+
+.wrapper {
+  width: 420px; /* Reduced width */
+  /* max-width: 80%;  */
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  color: black;
+  border-radius: 10px;
+  margin-left: 120px;
+  
+}
+
+.custom-btn {
+  font-size: 12px; /* Adjust font size as needed */
+  padding: 5px 10px; /* Adjust padding for size */
+  background-color: #858383; /* Custom background color */
+  color: #fff; /* Custom text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Add border radius for rounded corners */
+}
+
+.custom-btn:hover {
+  background-color: #aaa; /* Custom background color on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  

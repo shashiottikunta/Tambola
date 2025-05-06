@@ -1,0 +1,94 @@
+/* Add these CSS styles to enhance ngx-datatable appearance */
+
+/* Container styling */
+.data-table {
+	font-family: "SF Pro Text";
+  }
+  
+  .datatable-header {
+    font-family: "Arial";
+    background: linear-gradient(180deg, #081c33, rgba(26, 37, 134, 0.4)) !important;
+  }
+  
+  
+  .datatable-header-cell-label {
+	color: #fff;
+	font-family: 'Roboto' !important;
+	font-size: 13px;
+	font-weight: 400;
+	padding: 10px 20px 10px 0 !important;
+	padding-top: 31px !important;
+  }
+  
+  .datatable-header-cell {
+	border-right: 1px solid rgba(247, 243, 243, 0.125);
+  }
+  
+  /* Body styling */
+  .datatable-body-cell {
+	vertical-align: top;
+	display: inline-block;
+	line-height: 1.625;
+	border-right: 2px solid rgb(179, 179, 179); /* Optional: Add border to body cells */
+  }
+  
+  /* Row hover effect */
+  .ngx-datatable .datatable-row-wrapper {
+	background-color: #eeeeee !important;
+  }
+  
+  .ngx-datatable .datatable-row-wrapper .datatable-body-row.datatable-row-even {
+	background-color: #ffffff !important;
+  }
+
+  
+  /* Pagination styling */
+  .ngx-datatable .datatable-footer {
+	// position: absolute;
+	top: 0;
+	border-bottom: 1px solid rgba(43, 42, 42, 0.12);
+  }
+  
+  .ngx-datatable .datatable-footer .datatable-pager a {
+	padding: 0 6px !important;
+	border-radius: 3px;
+	margin: 6px 3px !important;
+  }
+
+ 
+  
+  .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li.active,
+  .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li.active:hover {
+	background-color: #606FC7 !important;
+	color: white;
+  }
+  
+  /* Responsive styling */
+  .ngx-datatable .datatable-header .datatable-header-cell:first-child {
+	padding-left: 10px !important;
+  }
+  
+  .ngx-datatable .datatable-header .datatable-header-cell:last-child {
+	padding-right: 10px;
+  }
+  
+  .ngx-datatable .datatable-body .datatable-body-row .datatable-body-cell:first-child {
+	padding-left: 10px;
+  }
+  
+  .ngx-datatable .datatable-body .datatable-body-row .datatable-body-cell:first-child {
+	padding-right: 10px;
+  }
+
+  .ngx-datatable.bootstrap .datatable-footer .pager li a {
+    background-image: none !important;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+/* Hide the right arrow specifically */
+
+

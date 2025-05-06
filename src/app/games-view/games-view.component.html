@@ -1,0 +1,268 @@
+<div class="col-lg-12 row ">
+
+  
+
+   
+ 
+    <div class="col-lg-6">
+      <div class=" wrapper">
+        <div class="card-body">
+          <div class="number-grid">
+            <div *ngFor="let number of allNumbers" class="number-box" [style.background-color]="NumbersPicked?.includes(number) ? 'red' : 'white'">
+              {{ number }}
+            </div>
+          </div>
+        </div>
+      <br>
+      <div class="col-lg-10" *ngIf="showGenerate">
+          <div class="input-group">
+            <input type="text" class="form-control form-control-sm" [(ngModel)]="randomNumber" placeholder="Enter Number">
+              <button class="custom-btn" type="button" (click)="generateNumber()">Generate Number</button>
+              <button class="custom-btn" type="button" (click)="submitNumber()" >Submit</button>
+          </div>
+        </div>
+        <div class="col-lg-10 pt-4" *ngIf="showGenerate">
+          <div class="col-lg-8">
+            <div class="card" style ="width:200%">
+              <div class="card-header bg-primary text-white">
+                Winners List
+              </div>
+              <div class="card-body">
+                <ng-container *ngIf="winnersList && winnersList.length > 0; else noDataMessage">
+                  <div class="card-body" *ngFor="let player of winnersList; let i = index">
+                    <div class="row">
+                      <p>{{i+1}}. {{player?.winner_name }} - {{ player?.winner_phone}} - {{player?.winning_category}}</p>
+
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-template #noDataMessage>
+                  <div class="text-center">No data available</div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+    </div>
+  
+ 
+   
+
+  </div>
+
+  <div class="col-lg-5 " style="margin-right: 100px;">
+    <div class="row justify-content-end">
+      <div class="" *ngIf="showButton" style="padding-left: 290px">
+        <!-- <button class="my-button" (click)="showModal()">Add Player</button> -->
+        <button class="start-button" (click)="startnewGame('start')">Start Game</button>
+      </div>
+      <div *ngIf="showGenerate" style="padding-left: 410px">
+        <button class="start-button" (click)="startnewGame('end')">End Game</button>
+      </div>
+    </div>
+    
+    
+    
+  
+      <div class="dt-responsive table-responsive timesheet-grid searchResultDatatable pt-2">
+        <ngx-datatable ngx-resize-watcher #myTimesheetTable class="data-table bootstrap datatable material"
+          [columnMode]="'flex'" [footerHeight]="50" [rowHeight]="'auto'" [rows]="plyersList"
+          [externalPaging]="true"  [count]="totalCount"
+          [offset]="myGameListPage.pageNumber" [limit]="myGameListPage.limit" (page)="setMySheetsPage($event)"
+          (sort)="sortMyTimeSheetCallback($event)" [sorts]="[{prop: 'tsDate', dir: 'desc'}]" >
+          <ngx-datatable-column  prop="name" [flexGrow]="2" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Cost Center Name" class="datatable-header-cell-label draggable">Name
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <span class="text">{{row.player.name ? row.player.name :'' }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column  prop="phone" [flexGrow]="2" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Date" class="datatable-header-cell-label draggable">Phone Number
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <span class="text">{{row.player.phone ? row.player.phone:'' }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column  prop="actions" [flexGrow]="2" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Type" class="datatable-header-cell-label draggable">Ticket
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <i class="fa fa-eye" type="button" (click)="viewTicket(row)" aria-hidden="true"></i>            
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-footer *ngIf="plyersList && plyersList.length > 0">
+            <ng-template ngx-datatable-footer-template let-rowCount="count" let-pageSize="pageSize"
+              let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+              <div class="rows-per-page-outer">
+                <div class="rows-per-page">
+                  <div class="rows-per-page-select">
+                    <select (change)="onPageMyTimeSheetSizeChange($event)" class="page-size-combo phoenix-select"
+                      name="myGameListPage">
+                      <option *ngFor="let size of sizeList" [value]="size"
+                        [selected]="size === myTimeSheetsPageSize">
+                        {{size}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'"
+                [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'"
+                [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="pageSize" [count]="totalCount"
+                [hidden]="!((totalCount / pageSize) > 1)" (change)="myTimesheetTable.onFooterPage($event)">
+              </datatable-pager>
+              <div class="total-records">Total Records: {{totalCount}}</div>
+            </ng-template>
+          </ngx-datatable-footer>
+        </ngx-datatable>
+      </div>
+
+    
+    
+   
+
+     
+      
+    
+  
+ 
+   
+     
+    <!-- <table class="table table-striped pt-4 mt-4">
+      <thead>
+        <tr class="text-center">
+          <th scope="col">Sl.No</th>
+          <th scope="col">Name</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Ticket</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="plyersList && plyersList.length > 0; else noDataMessage">
+        <tr *ngFor="let player of plyersList; let i = index" class="text-center">
+          <td>{{i+1}}</td>
+          <td>{{player?.player?.name}}</td>
+          <td>{{player?.player?.phone}}</td>
+          <td><i class="fa fa-eye" type="button" (click)="viewTicket(player)" aria-hidden="true"></i></td>
+        </tr>
+      </tbody>
+      <ng-template #noDataMessage>
+        <tr>
+          <td colspan="4" class="text-center">No data available</td>
+        </tr>
+      </ng-template>
+      
+    </table> -->
+  </div>
+
+</div>
+
+
+<div bsModal #addPlayerData="bs-modal" class="modal fade" id="addPlayerDataModel" role="dialog"
+  [config]="{backdrop: 'static'}" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><strong>Add Player</strong></h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="addPlayerForm">
+          <div class="row pt-2 ">
+            <div class="col-md-10 d-flex">
+              <div class="col-md-4">
+                <label class="form-label">Name</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" placeholder="Enter Name" class="form-control" formControlName="name">
+              </div>
+            </div>
+          </div>
+          <div class="row pt-2 ">
+            <div class="col-md-10 d-flex">
+              <div class="col-md-4">
+                <label class="form-label">Phone Number</label>
+              </div>
+              <div class="col-md-6">
+                <input type="text" placeholder="Enter Phone Number" class="form-control" formControlName="number">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="submit()">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="hideModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div bsModal #ticketData="bs-modal" class="modal fade" id="ticketDataModel" role="dialog"
+  [config]="{backdrop: 'static'}" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><strong>Ticket Data</strong></h4>
+      </div>
+      <div class="modal-body">
+        <div class="col-lg-12">
+          <div class="number-grid1">
+            <div class="row" *ngFor="let row of ticketDataNew">
+              <div class="number-box1" *ngFor="let number of row">
+                <span *ngIf="number === 0; else displayNumber">{{ 'x' }}</span>
+                <ng-template #displayNumber>{{ number }}</ng-template>
+              </div>
+            </div>
+          </div>
+          
+
+          <!-- <table class="table table-striped pt-4 mt-4">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">Sl.No</th>
+                <th scope="col">Player Name</th>
+                <th scope="col">Player Phone</th>
+                <th scope="col">Winning Type</th>
+              </tr>
+            </thead>
+            <tbody *ngIf="winnersList && winnersList.length > 0; else noDataMessage">
+              <tr *ngFor="let player of winnersList; let i = index" class="text-center">
+                <td>{{i + 1}}</td>
+                <td>{{player?.player?.winner_name}}</td>
+                <td>{{player?.winner_phone}}</td>
+                <td>{{player?.winning_category}}</td>
+              </tr>
+            </tbody>
+            <ng-template #noDataMessage>
+              <tr>
+                <td colspan="4" class="text-center">No data available</td>
+              </tr>
+            </ng-template>
+          </table> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-success" 
+          (click)="submit()">Save</button> -->
+        <button type="button" class="btn btn-secondary" (click)="hideModalTicket()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

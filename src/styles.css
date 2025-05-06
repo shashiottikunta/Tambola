@@ -1,0 +1,93 @@
+body {
+    font-family: 'Roboto', sans-serif;
+  }
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell .datatable-header-cell-label {
+    line-height: 10px;
+    font-size: 15px;
+    font-family: sans-serif !important
+}
+
+.ngx-datatable.bootstrap .datatable-footer .pager li a.next {
+    display: none !important;
+}
+
+.ngx-datatable .datatable-footer {
+    display: block!important;
+    width: 100% !important;
+}
+
+
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell {
+    vertical-align: bottom;
+    padding: 0.55rem !important;
+    border-bottom: 1px solid #d1d4d7;
+    text-align: center!important;
+
+}
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row .datatable-body-cell {
+    padding: 0.55rem !important;
+    text-align: center !important;
+    vertical-align: top;
+}
+
+.ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after {
+    box-sizing: border-box;
+    font-size: 13px;
+    /* font-family: sans-serif !important; */
+}
+
+.ngx-datatable.bootstrap .datatable-footer {
+    background: linear-gradient(180deg, #ffc107, rgb(10 15 60 / 40%)) !important;
+    color: #ededed;
+    margin-top: -1px;
+}
+
+.rows-per-page-select {
+    position: relative;
+  }
+  
+  /* Style for the dropdown select element */
+  .page-size-combo {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 20px
+  }
+  
+  /* Style for the dropdown select when hovered */
+  .page-size-combo:hover {
+    background-color: #f8f9fa;
+  }
+  
+  /* Style for the dropdown select when focused */
+  .page-size-combo:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Style for the dropdown options */
+  .page-size-combo option {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .ngx-datatable .datatable-footer {
+    display: block;
+    width: 100%;
+  
+  }
+
+  .text{
+    font-family: sans-serif !important;
+  }
+
+
+

@@ -1,0 +1,180 @@
+  <div class="col-lg-12">
+    <div class="col-lg-11 d-flex justify-content-end">
+
+      <button class="my-button" (click)="openModel()">New Game</button>
+      </div>
+    <div class="col-lg-11">
+      <div class="dt-responsive table-responsive timesheet-grid searchResultDatatable">
+        <ngx-datatable ngx-resize-watcher #myTimesheetTable class="data-table bootstrap datatable material"
+          [columnMode]="'flex'" [footerHeight]="50" [rowHeight]="'auto'" [rows]="gamesList" [externalPaging]="true"
+          [count]="totalCount" [offset]="myGameListPage.pageNumber" [limit]="myGameListPage.limit"
+          (page)="setMySheetsPage($event)" (sort)="sortMyTimeSheetCallback($event)"
+          [sorts]="[{prop: 'tsDate', dir: 'desc'}]">
+          <ngx-datatable-column prop="game_id" [flexGrow]="3" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Cost Center Name" class="datatable-header-cell-label draggable">Game ID
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <span class="text">{{row.game_id ? row.game_id :'' }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+       
+          <ngx-datatable-column prop="registration_open_time" [flexGrow]="2" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Date" class="datatable-header-cell-label draggable"> Registration Start Date
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <span class="text">{{row.registration_open_time ? (row.registration_open_time) :'' }}</span>
+            </ng-template>
+            
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="registration_close_time" [flexGrow]="2" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Date" class="datatable-header-cell-label draggable">Registration End Date
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <span class="text">{{row.registration_close_time ? (row.registration_close_time) :'' }}</span>
+            </ng-template>
+            
+          </ngx-datatable-column>
+             <ngx-datatable-column prop="status" [flexGrow]="2" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Date" class="datatable-header-cell-label draggable">Status
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <span class="text">{{row.status ? (row.status) :'' }}</span>
+            </ng-template>
+            
+          </ngx-datatable-column>
+          <ngx-datatable-column prop="actions" [flexGrow]="1" [sortable]="false">
+            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper" (click)="sort()">
+                <span title="Type" class="datatable-header-cell-label draggable">Actions
+                </span>
+              </span>
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-row="row">
+              <i class="fa fa-eye" type="submit"  (click)="viewGame(row.game_id, row?.status)" aria-hidden="true"></i>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-footer  *ngIf="gamesList && gamesList.length > 0">
+            <ng-template ngx-datatable-footer-template let-rowCount="count" let-pageSize="pageSize"
+              let-selectedCount="selectedCount" let-curPage="curPage" let-offset="offset">
+              <div class="rows-per-page-outer">
+                <div class="rows-per-page">
+                  <div class="rows-per-page-select">
+                    <select (change)="onPageMyTimeSheetSizeChange($event)" class="page-size-combo phoenix-select"
+                      name="myGameListPage">
+                      <option *ngFor="let size of sizeList" [value]="size" [selected]="size === myTimeSheetsPageSize">
+                        {{size}}</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <datatable-pager [pagerLeftArrowIcon]="'datatable-icon-left'"
+                [pagerRightArrowIcon]="'datatable-icon-right'" [pagerPreviousIcon]="'datatable-icon-prev'"
+                [pagerNextIcon]="'datatable-icon-skip'" [page]="curPage" [size]="pageSize" [count]="totalCount"
+                [hidden]="!((totalCount / pageSize) > 1)" (change)="myTimesheetTable.onFooterPage($event)">
+              </datatable-pager>
+              <div class="total-records" style="margin-left: 5px;margin-right: 10px; font-weight: bold;
+              font-size: 13px;">Total Records: {{totalCount}}</div>
+            </ng-template>
+          </ngx-datatable-footer>
+        </ngx-datatable>
+      </div>
+
+
+
+
+
+
+
+
+
+
+      <!-- <table>
+        <thead>
+          <tr>
+            <th>Sl.No</th>
+            <th>Game ID</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let game of gamesList; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{game?.game_id}}</td>
+            <td>{{game?.status}}</td>
+            <td> <i class="fa fa-eye" type="button" (click)="viewGame(game?.game_id, game?.status)" aria-hidden="true"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+
+
+    </div>
+
+
+  </div>
+
+  <div bsModal #addGameData="bs-modal" class="modal fade">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header header-color justify-content-center">
+          <h5 class="modal-title chngpass-text" id="exampleModalLabel" >Add Game</h5>
+        </div>
+    <div class="modal-body">
+  <div class="container-fluid justify-content-center">
+    <form [formGroup]="addGameForm">
+      <div class="row">
+        <div class="col-md-10 d-flex justify-content-center">
+          <div class="col-md-4">
+            <label class="form-label">Registration Start Date:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="date" class="form-control" formControlName="startDate">
+          </div>
+          <div class="col-md-2">
+            <input type="time" class="form-control" formControlName="startTime">
+          </div>
+        </div>
+      </div>
+      <div class="row pt-2">
+        <div class="col-md-10 d-flex justify-content-center">
+          <div class="col-md-4">
+            <label class="form-label">Registration End Date:</label>
+          </div>
+          <div class="col-md-4">
+            <input type="date" class="form-control" formControlName="endDate">
+          </div>
+          <div class="col-md-2">
+            <input type="time" class="form-control" formControlName="endTime">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+        <div class="modal-footer justify-content-center">
+          <button (click)="closeModel()" type="submit" class="btn btn-secondary">Close</button>
+          <button (click)="newGame()" type="submit" class="btn btn-primary">Save</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  
